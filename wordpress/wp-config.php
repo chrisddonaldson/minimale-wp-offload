@@ -128,12 +128,16 @@ if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 	eval($configExtra);
 }
 
-define( 'AS3CF_SETTINGS', serialize( array(
-	'provider' => 'aws',
-	'access-key-id' => '********************',
-	'secret-access-key' => '**************************************',
-) ) );
-
+// Add custom ENV support
+if ( getenv('AWS_ACCESS_KEY_ID') ) {
+    define('AS3CF_SETTINGS', serialize([
+        'provider' => 'aws',
+        'access-key-id' => getenv('AWS_ACCESS_KEY_ID'),
+        'secret-access-key' => getenv('AWS_SECRET_ACCESS_KEY'),
+        'region' => getenv('AWS_REGION'),
+        'bucket' => getenv('AWS_BUCKET'),
+    ]));
+}
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
