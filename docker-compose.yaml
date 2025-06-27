@@ -14,7 +14,7 @@ services:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     volumes:
-      - wordpress-data:/var/www/html
+      - wordpress_data:/var/www/html
       - ./plugins:/var/www/html/wp-content/plugins
     depends_on:
       - db
